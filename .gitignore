@@ -1,0 +1,6 @@
+.vs/
+bin/
+obj/
+PublishProfiles/
+*.user
+node_modules/
