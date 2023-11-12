@@ -4,3 +4,5 @@ obj/
 PublishProfiles/
 *.user
 node_modules/
+.env
+backend/static/assets/

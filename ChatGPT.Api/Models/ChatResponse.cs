@@ -43,6 +43,7 @@ public record ChatAppResponseOrError : ChatAppResponse
     public required string Error { get; set; }
 }
 
+[JsonDerivedType(typeof(ChatAppResponseOrError))]
 public record ChatAppResponse
 {
     [JsonPropertyName("choices")]

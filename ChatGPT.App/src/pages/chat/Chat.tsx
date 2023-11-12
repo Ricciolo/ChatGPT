@@ -46,7 +46,7 @@ const Chat = () => {
             for await (const event of readNDJSONStream(responseBody)) {
                 if (event["choices"] && event["choices"][0] && !askResponse.choices) {
                     askResponse = event;
-                } else if (event["choices"] && event["choices"][0]["message"]["content"]) {
+                } else if (event["choices"] && event["choices"].length > 0 && event["choices"][0]["message"]["content"]) {
                     await updateState(event["choices"][0]["message"]["content"]);
                     setIsLoading(false);
                 } else if (event["error"]) {

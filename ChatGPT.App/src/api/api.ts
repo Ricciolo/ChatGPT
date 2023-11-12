@@ -1,4 +1,4 @@
-const BACKEND_URI = "http://localhost:5090";
+const BACKEND_URI = import.meta.env.PROD ? "https://chatgpt-api.reddesert-78306892.westeurope.azurecontainerapps.io" : "http://localhost:5090";
 
 import { ChatAppResponse, ChatAppResponseOrError, ChatAppRequest } from "./models";
 

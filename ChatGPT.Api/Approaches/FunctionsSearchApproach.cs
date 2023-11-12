@@ -72,11 +72,30 @@ internal class FunctionsSearchApproach : ApproachBase
         var loop = true;
         var anyFunctionCalled = false;
         Response<StreamingChatCompletions>? response = null;
+
         while (loop)
         {
             // Ottengo la risposta
-            response = await _openAiClient.GetChatCompletionsStreamingAsync(GptModel, options, token);
-            token.ThrowIfCancellationRequested();
+            var contentFilter = false;
+            try
+            {
+                response = await _openAiClient.GetChatCompletionsStreamingAsync(GptModel, options, token);
+                token.ThrowIfCancellationRequested();
+            }
+            catch (RequestFailedException ex) when (ex.ErrorCode=="content_filter")
+            {
+                contentFilter = true;
+            }
+
+            // Input considerato offensivo
+            if (contentFilter)
+            {
+                yield return new ChatAppResponseOrError
+                {
+                    Error = "Content moderated"
+                };
+                yield break;
+            }
 
             await foreach (var choice in response.Value.GetChoicesStreaming(token))
             {
