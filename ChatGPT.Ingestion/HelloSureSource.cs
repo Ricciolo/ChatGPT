@@ -39,7 +39,11 @@ internal partial class HelloSureSource : ISource
         }
 
         // Solo le pagine in italiano del manuale
-        if (!uri.LocalPath.StartsWith("/index.php/it", StringComparison.OrdinalIgnoreCase))
+        if (uri.LocalPath.StartsWith("/index.php/en", StringComparison.OrdinalIgnoreCase)
+            || uri.LocalPath.StartsWith("/index.php/es", StringComparison.OrdinalIgnoreCase)
+            || uri.LocalPath.StartsWith("/index.php/mx", StringComparison.OrdinalIgnoreCase)
+            || uri.LocalPath.StartsWith("/index.php/en-au", StringComparison.OrdinalIgnoreCase)
+            || uri.LocalPath.StartsWith("/store/", StringComparison.OrdinalIgnoreCase))
         {
             yield break;
         }
