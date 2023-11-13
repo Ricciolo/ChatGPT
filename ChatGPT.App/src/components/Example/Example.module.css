@@ -39,3 +39,10 @@
         height: 80px;
     }
 }
+
+@media only screen and (max-width: 760px) {
+    .exampleText {
+       font-size: 18px;
+       height: 50px;
+    }
+}
